@@ -1,5 +1,3 @@
-from os import environ
-
 from .base import *
 
 def read_secret(secret_name):
@@ -11,18 +9,10 @@ def read_secret(secret_name):
 
     return secret
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-
-environ.env.read_env(
-    env_file=os.path.join(BASE_DIR, '.env')
-)
-
 # env_list = dict()
 #
 # local_env = open(os.path.join(BASE_DIR, '.env'))
-# 
+#
 # while True:
 #     line = local_env.readline()
 #     if not line:

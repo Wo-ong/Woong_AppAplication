@@ -1,3 +1,5 @@
+from os import environ
+
 from .base import *
 
 def read_secret(secret_name):
@@ -9,19 +11,27 @@ def read_secret(secret_name):
 
     return secret
 
-env_list = dict()
+env = environ.Env(
+    DEBUG=(bool, False)
+)
 
-local_env = open(os.path.join(BASE_DIR, '.env'))
+environ.env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
 
-while True:
-    line = local_env.readline()
-    if not line:
-        break
-    line = line.replace('\n','')
-    start = line.find('=')
-    key = line[:start]
-    value = line[start+1:]
-    env_list[key] = value
+# env_list = dict()
+#
+# local_env = open(os.path.join(BASE_DIR, '.env'))
+# 
+# while True:
+#     line = local_env.readline()
+#     if not line:
+#         break
+#     line = line.replace('\n','')
+#     start = line.find('=')
+#     key = line[:start]
+#     value = line[start+1:]
+#     env_list[key] = value
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
